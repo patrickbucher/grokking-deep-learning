@@ -11,19 +11,19 @@ score = iq * 0.5 + lessons * 0.2 + studied * 0.3
 print(score)
 
 weights = np.array([1/3, 1/3, 1/3])
-alpha = 0.00001
+alpha = 0.0001
 
-for i in range(10000):
+for i in range(int(1.0/alpha)):
     for j in range(len(score)):
         input = np.array([iq[j], lessons[j], studied[j]])
         goal = score[j]
 
         prediction = input.dot(weights)
 
-        delta = prediction - goal
+        delta = goal - prediction
         error = delta ** 2
         weight_delta = input * delta
 
-        weights -= weight_delta * alpha
+        weights += weight_delta * alpha
 
 print(weights)
